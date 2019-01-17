@@ -1,7 +1,7 @@
 # ransac_slam
 An open source SLAM system (EKFmonocularSLAM) that is rewritten in C++ in combination with ROS, Eigen.
 
-(https://github.com/plumewind/ransac_slam/blob/master/rviz_screenshot.png)
+![Image text](https://github.com/plumewind/ransac_slam/blob/master/rviz_screenshot.png)
 
 # Learn from
 
