@@ -9,7 +9,7 @@ An open source SLAM system (EKFmonocularSLAM) that is rewritten in C++ in combin
 
 （2）EKFmonocularSLAM on github ： https://github.com/OpenSLAM-org/openslam_ekfmonoslam
 
-（3）paper
+（3）paper  
 [1]   Javier Civera, Oscar G. Grasa, Andrew J. Davison, J. M. M. Montiel,
       1-Point RANSAC for EKF Filtering: Application to Real-Time Structure from Motion and Visual Odometry,
       to appear in Journal of Field Robotics, October 2010.
