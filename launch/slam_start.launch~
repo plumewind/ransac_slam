@@ -1,0 +1,21 @@
+<launch>
+<arg name="cam_link" default="camera_link" />
+<arg name="feat_link" default="features_link" />
+<arg name="odom_link" default="odom" />
+<!--<arg name="map_param_file" default="$(find ekf_slam)/param/webmap.yaml"/>
+<arg name="config_param_file" default="$(find ekf_slam)/param/configfile.yaml"/>-->
+
+<!-- node的三个属性分别为程序包名字pkg，可执行文件type和节点名字的名字name-->
+<node pkg="ransac_slam" type="mono_node" name="mono_slam" output="screen">
+
+
+ <!--<rosparam file="$(arg map_param_file)" command="load" />
+ <rosparam file="$(arg config_param_file)" command="load" />-->
+</node>
+
+ <node pkg="tf" type="static_transform_publisher" name="map_to_cam" args="0 0 0.5 0 0 0 map $(arg cam_link) 100"/>
+ <node pkg="tf" type="static_transform_publisher" name="map_to_feat" args="0 0 0.25 0 0 0 map $(arg feat_link) 100"/>
+ <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map $(arg odom_link) 100"/>
+ 
+ 
+</launch>

@@ -1,0 +1,91 @@
+#include "ransac_slam/System.h"
+
+int main(int argc, char **argv)
+{
+	// Set up ROS node
+	ros::init(argc,  argv, "mono_slam");
+	
+	// Sequence path and initial image	
+	std::string Images_Path = "data/images_sequences/rawoutput";
+	std::string strSettingsFile = "examples/Monocular/initialize_param.yaml";
+	int initIm = 90;
+	int lastIm = 95;
+	//int lastIm = 2169;
+	//cvNamedWindow("image",1);
+	int nImages = lastIm - initIm + 1;
+	
+	 if(argc == 2)
+	{
+		//std::cerr << std::endl << "Usage: ./mono_tum path_to_image_folder path_to_settings" << std::endl;
+		//return 1;
+		strSettingsFile = std::string(argv[1]);
+	}
+	
+	//Check settings file
+	cv::FileStorage fSettings(strSettingsFile.c_str(), cv::FileStorage::READ);
+	if(fSettings.isOpened())
+	{
+		//std::cerr << "Failed to open settings file at: " << strSettingsFile << std::endl;
+		//exit(-1);
+		Images_Path = (std::string)fSettings["Images_Path"];
+		initIm = (int)fSettings["Images_start"];
+		lastIm = (int)fSettings["Images_end"];
+	}
+	fSettings.release();  
+	
+	// Create SLAM system. It initializes all system threads and gets ready to process frames.
+	//TODO initializes slam
+	ransac_slam::System SLAM(strSettingsFile, true);
+	
+	 // Vector for tracking time statistics
+	std::vector<float> vTimesTrack;
+	vTimesTrack.resize(nImages);
+
+	std::cout << std::endl << "------------" << std::endl;
+	std::cout << "Start processing sequence ..." << std::endl;
+	std::cout << "Images in the sequence: " << nImages << std::endl << std::endl;
+
+	// Main loop
+	cv::Mat imRGB;
+	char filename[40];
+// 	for(int i = initIm; i < lastIm; i++)
+// 	{
+// 		// Read image from file
+// 		memset(filename, 0, 40);
+// 		std::sprintf(filename, "%s%04d.pgm", Images_Path.c_str(), i);
+// 		imRGB = cv::imread(std::string(filename), CV_LOAD_IMAGE_UNCHANGED);
+// 		//double tframe = vTimestamps[ni];
+// 
+// 		if(imRGB.empty())
+// 		{
+// 			std::cerr << std::endl << "Failed to load image at: "<< filename << std::endl;
+// 			return 1;
+// 		}
+// 		
+// 		#ifdef COMPILEDWITHC11
+//         std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+// #else
+//         std::chrono::monotonic_clock::time_point t1 = std::chrono::monotonic_clock::now();
+// #endif
+// 
+//         // TODO: Pass the image to the SLAM system
+//         //SLAM.TrackMonocular(im,tframe);
+// 
+// #ifdef COMPILEDWITHC11
+//         std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
+// #else
+//         std::chrono::monotonic_clock::time_point t2 = std::chrono::monotonic_clock::now();
+// #endif
+// 
+//         double ttrack= std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
+// 	 vTimesTrack[i - initIm]=ttrack;
+// 	
+// 	
+// 		//cv::imshow( "image", imRGB );    
+// 		cv::waitKey(20);//延时20毫秒
+// 		
+// 	}
+// 	
+	
+	return 0;
+}

@@ -1,0 +1,30 @@
+<launch>
+
+<arg name="odom_link" default="odom" />
+<arg name="config_param_file" default="$(find ransac_slam)/examples/Monocular/initialize_param.yaml"/>
+<arg name="images_file_path" default="$(find ransac_slam)/data/images_sequences/rawoutput"/>
+
+<!-- node的三个属性分别为程序包名字pkg，可执行文件type和节点名字的名字name-->
+<node pkg="ransac_slam" type="mono_node" name="mono_slam" output="screen">
+	<param name="image_path" type="string" value="$(arg images_file_path)" />
+	<param name="config_file" type="string" value="$(arg config_param_file)" />
+	<param name="image_start" type="int" value="900" />
+	<param name="image_end" type="int" value="2169" />
+</node>
+
+<!-- Load the URDF/Xacro model of our robot -->  
+   <param name="robot_description" command="$(find xacro)/xacro.py '$(find ransac_slam)/urdf/kinect.urdf.xacro'" />  
+
+ 	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >  
+		<param name="use_gui" value="False"/>
+	</node>  
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">  
+		<param name="publish_frequency" type="double" value="20.0" />  
+	</node> 
+
+   <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map $(arg odom_link) 100"/>
+
+   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ransac_slam)/rviz/view_tracking.rviz"/>
+ 
+</launch>

@@ -1,0 +1,51 @@
+%YAML:1.0
+
+#-------------------------------------------------------------------------------
+# Camera Parameters. Adjust them!
+#-------------------------------------------------------------------------------
+
+# Camera calibration and distortion parameters (OpenCV) 
+
+Camera.k1: 0.06333
+Camera.k2: 0.01390
+Camera.nRows: 240
+Camera.nCols: 320
+Camera.d: 0.0112
+Camera.cx_d: 1.7945 # 1.7945 / d
+Camera.cy_d: 1.4433 # 1.4433 / d
+Camera.dx: 0.0112
+Camera.dy: 0.0112
+Camera.model: two_distortion_parameters
+
+# Camera frames per second 
+Camera.fps: 2.1735
+
+# Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
+Camera.RGB: 1
+
+#-------------------------------------------------------------------------------
+# Config Parameters. Adjust them!
+#-------------------------------------------------------------------------------
+
+# Sequence path and initial image
+
+Images.Path: /home/lyq/catkin_slam/src/ransac_slam/data/images_sequences/rawoutput
+Images.start: 900
+Images.end: 2169
+
+#-------------------------------------------------------------------------------
+# EKF filter Parameters. Adjust them!
+#-------------------------------------------------------------------------------
+
+Sigma.a: 0.007 # standar deviation for linear acceleration noise
+Sigma.alpha: 0.007 # standar deviation for angular acceleration noise
+Sigma.noise: 1.0 #standar deviation for measurement noise
+
+# Initial velocity values
+Velocity.v0: 0
+Velocity.stdv0:  0.025
+Velocity.w0: 0.00000000001
+Velocity.stdw0: 0.025 
+
+# Other
+min_number_of_features_in_image: 25
