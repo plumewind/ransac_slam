@@ -19,17 +19,17 @@ An open source SLAM system (EKFmonocularSLAM) that is rewritten in C++ in combin
 I wrote a blog on CSDN : https://blog.csdn.net/qq_36355662/article/details/84938284
 
 # Hardware/Software Requirements
-（1）ubuntu
+1.ubuntu
 14.04 or 16.04
-（2）ROS
+2.ROS
 indigo or kinetic
-（3）Eigen
+3.Eigen
 sudo apt-get install libeigen3-dev
 #添加头文件
 include_directories("/usr/include/eigen3")
-（4）opencv 3.2.0
+4.opencv 3.2.0
 
-（5）vision_opencv package
+5.vision_opencv package
 $ git clone https://github.com/ros-perception/vision_opencv.git
 
 
