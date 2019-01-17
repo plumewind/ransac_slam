@@ -34,4 +34,4 @@ $ git clone https://github.com/ros-perception/vision_opencv.git
 
 
 # How to start ?
-$ roalaunch ransac_slam ransac_slam.launch
+$ roslaunch ransac_slam ransac_slam.launch
